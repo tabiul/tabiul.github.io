@@ -1,0 +1,8 @@
+name: Yet Another Programming Blog 
+url: http://example.org
+
+permalink: /:year/:month/:day/:title/
+paginate: 10
+
+gems: [jekyll-paginate]
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
