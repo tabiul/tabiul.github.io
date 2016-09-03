@@ -3,10 +3,10 @@ This is my attempt to explain various **OAuth2 Grant Types**
 
 ## Definitions
 
-**Resource Owner** - User or owner of the resource 
-**Resource Server** - Application where the resource is stored
-**Authorization Server** - Application that authenticate the client
-**Client** - Requestor
+* **Resource Owner** - User or owner of the resource 
+* **Resource Server** - Application where the resource is stored
+* **Authorization Server** - Application that authenticate the client
+* **Client** - Requestor
 
 
 ## Authorization Code Grant
@@ -21,7 +21,7 @@ In this grant type, there are three steps
 
 ### Step 1 (User Authentication)
 
-* Client send a request to the **Authorization Server** with the following url
+Client send a request to the **Authorization Server** with the following url
 
 		https://oauth2server.com/auth?response_type=code&client_id=CLIENT_ID&redirect_uri=REDIRECT_URI&scope=photos 
 		
@@ -30,7 +30,7 @@ In this grant type, there are three steps
     * **redirect_uri** This is the url that is redirected by Authorization Server once authentication is done
     * **scope** This is the access level requested by client
 
-* Assuming the user is authenticated successfully and user accepts the requested access, the response will be
+Assuming the user is authenticated successfully and user accepts the requested access, the response will be
 
 	    https://oauth2client.com/cb?code=AUTH_CODE_HERE
 
@@ -40,7 +40,7 @@ otherwise it will be
 
 ### Step 2 (Client Authentication)
 
-* Client send a **HTTP Post** request to the **Authorization Server** with the following body (note the authorization code and client_secret) 
+Client send a **HTTP Post** request to the **Authorization Server** with the following body (note the authorization code and client_secret) 
 
 	    POST https://api.oauth2server.com/token
 	     grant_type=authorization_code&
@@ -49,7 +49,7 @@ otherwise it will be
 	     client_id=CLIENT_ID&
 	     client_secret=CLIENT_SECRET
 	     
-* Assuming the **client_id**, **client secret** and **code** is valid then the response will be
+Assuming the **client_id**, **client secret** and **code** is valid then the response will be
 
 		{
 		  "access_token": "ff16372e-38a7-4e29-88c2-1fb92897f558",
@@ -59,7 +59,7 @@ otherwise it will be
 		  "scope": "photos"
 		}
 
-   otherwise
+otherwise
 
 		{
 		    "error":"invalid_request"
@@ -75,7 +75,7 @@ otherwise it will be
 		
 ### Step 3 (Resource Access)
 
-* Client calls the **Resource Server** with the **access_token** as part of the header `Authorization: Bearer <access_token>`
+Client calls the **Resource Server** with the **access_token** as part of the header `Authorization: Bearer <access_token>`
 
 ## Implicit Grant
 
@@ -83,7 +83,7 @@ This grant type is meant for application that cannot keep secret such as SPA, Mo
 
 ### Step 1 (User Authentication)
 
-* Client send a request to the **Authorization Server** with the following url 
+Client send a request to the **Authorization Server** with the following url 
 
 		https://oauth2server.com/auth?response_type=token&client_id=CLIENT_ID&redirect_uri=REDIRECT_URI&scope=photos 
 	
@@ -98,7 +98,7 @@ Client Credentials Grant type is meant for the client itself and is not related 
 
 ### Step 1 (Client Authentication)
 
-* Client send a HTTP Post request to the **Authorization Server** with the following url 
+Client send a HTTP Post request to the **Authorization Server** with the following url 
 
 		POST https://api.oauth2server.com/token
     			grant_type=client_credentials&
@@ -113,7 +113,7 @@ OAuth2 has a grant type where a client can pass username and password in order t
 
 ### Step 1 (User Authentication)
 
-* Client send a HTTP Post request to the **Authorization Server** with the following url 
+Client send a HTTP Post request to the **Authorization Server** with the following url 
 
 		POST https://api.oauth2server.com/token
     			grant_type=password&
